@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Tareas</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="contenedor">
+
+    <h1>Lista de Tareas</h1>
+
+    <!-- AREA PARA AGREGAR TAREA -->
+    <div class="input-area">
+        <input type="text" id="nuevaTarea" placeholder="Escribe una tarea...">
+        <button id="btnAgregar">Agregar</button>
+    </div>
+
+    <h2>Tareas pendientes</h2>
+    <ul id="listaTareas"></ul>
+
+    <button id="btnEliminar">Eliminar seleccionadas</button>
+
+    <h2>Tareas realizadas</h2>
+    <ul id="tareasRealizadas"></ul>
+
+</div>
+
+<script src="Tarea.js"></script>
+
+</body>
+</html>

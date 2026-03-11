@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8"> <!-- Define la codificación de caracteres como UTF-8 -->
+        <title>registro</title> <!-- Título que aparece en la pestaña del navegador -->
+        <!--<link rel="stylesheet" href="styles.css">  Vincula la hoja de estilos-->
+    </head>
+    <body>
+        <h1>registro de TO DO LIST en Node</h1> <!-- Encabezado principal de la página -->
+        <br>
+        <P>ingrese los siguientes datos</P> <!-- Etiqueta para el campo de usuario -->
+         <br>
+        <P>USUARIO:</P> <!-- Etiqueta para el campo de usuario -->
+        <input type="text" id="usname"> <!-- Campo de entrada para el nombre de usuario -->
+         <br>
+        <P>correo:</P> <!-- Etiqueta para el campo de usuario -->
+        <input type="email" id="Correo"> <!-- Campo de entrada para el nombre de usuario -->
+         <br>
+        <P>ingrese su pin:</P> <!-- Etiqueta para el campo de PIN -->
+        <input type="password" id="pin"> <!-- Campo de entrada para PIN (oculta caracteres) -->
+         <br>
+        <button onclick="registro()">registrarme</button>         <br>
+        <h1 id="respuesta"></h1> <!-- Elemento donde se mostrará el mensaje de respuesta -->
+        <script src="registro.js"></script> <!-- Vincula el archivo JavaScript que contiene la lógica de registro -->
+    </body>
+</html>
