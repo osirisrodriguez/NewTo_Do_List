@@ -2,9 +2,15 @@
 function registro(){
 
     // Obtener los valores de los inputs
-    const Usname = document.getElementById("usname").value;
-    const Correo = document.getElementById("Correo").value;
-    const Pin = document.getElementById("pin").value;
+    const Usname = document.getElementById("usname").value.trim();
+    const Correo = document.getElementById("Correo").value.trim();
+    const Pin = document.getElementById("pin").value.trim();
+
+    // VALIDACIÓN
+    if(Usname === "" || Correo === "" || Pin === ""){
+        alert("Todos los campos son obligatorios");
+        return;
+    }
 
     // Enviar datos al servidor
     fetch("/registro", {

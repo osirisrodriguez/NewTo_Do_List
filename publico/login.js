@@ -4,6 +4,7 @@ function login(){
     const Usname = document.getElementById("usname").value;
     // Obtiene el valor del campo de texto con id "pin" (contraseña)
     const Pin = document.getElementById("pin").value;
+    
 
     // Realiza una petición HTTP al servidor
     fetch("/login", {
@@ -16,16 +17,16 @@ function login(){
             pin: Pin        // Envía el PIN/contraseña
         })
     })
-        .then(res => res.json()) // Convierte la respuesta del servidor a formato JSON
-        .then(data => { // Procesa los datos recibidos del servidor
+.then(res => res.json()) // Convierte la respuesta del servidor a formato JSON
+   .then(data => {
 
-            // Verifica si el servidor indica que el usuario existe
-            if(data.existe){
-                // Muestra mensaje de bienvenida en el elemento con id "respuesta"
-                document.getElementById("respuesta").innerText = "bienvenido";
-                // Redirige al usuario a la página "Tarea.html" en la misma carpeta
-                window.location.href = 'Tarea.html';
-            }
+    if(data.existe){
+
+        localStorage.setItem("Idus", data.Idus);
+
+        window.location.href = "Tarea.html";
+
+    }
             else{
                 // Muestra mensaje de error si las credenciales son incorrectas
                 document.getElementById("respuesta").innerText = "nombre o contraseña no validos";

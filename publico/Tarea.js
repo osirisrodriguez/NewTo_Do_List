@@ -107,16 +107,25 @@ btnAgregar.addEventListener("click", () => {
 // eliminar tareas seleccionadas
 btnEliminar.addEventListener("click", () => {
 
-    const checkboxes = document.querySelectorAll("#listaTareas input[type='checkbox']:checked");
+    const checkboxes = document.querySelectorAll("#listaTareas input[type='checkbox']:checked, #tareasRealizadas input[type='checkbox']:checked");
 
     if(checkboxes.length === 0){
         alert("Seleccione una tarea para eliminar");
         return;
     }
 
+    if(!confirm(`¿Estás seguro de eliminar ${checkboxes.length} tarea(s)?`)) {
+        return;
+    }
+
+    // Contador para saber cuántas eliminaciones se completaron
+    let eliminadas = 0;
+    let errores = 0;
+
     checkboxes.forEach(c => {
 
-        const tarea = c.nextSibling.textContent;
+        const tareaElement = c.nextSibling;
+        const tarea = tareaElement.textContent;
 
         fetch("/eliminarTarea", {
 

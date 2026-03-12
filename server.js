@@ -18,21 +18,34 @@ app.use(express.static(path.join(__dirname, 'publico')));
 // login
 // ----------------------
 app.post('/login', (req, res) => {
+
     const Usname = req.body.Usname;
     const pin = req.body.pin;
-    const sql = `SELECT * FROM usuarios WHERE Usname='${Usname}' and pin='${pin}'`;
+
+    const sql = `SELECT * FROM usuarios WHERE Usname='${Usname}' AND pin='${pin}'`;
+
     db.consulta(sql, (error, resultados) => {
+
         if(error){
-            res.json({error: true});
+            res.json({error:true});
             return;
         }
+
         if(resultados.length > 0){
-            res.json({existe: true});
+
+            res.json({
+                existe:true,
+                Idus: resultados[0].Idus
+            });
+
+        }else{
+
+            res.json({existe:false});
+
         }
-        else{
-            res.json({existe: false});
-        }
+
     });
+
 });
 
 // ----------------------
@@ -113,6 +126,38 @@ app.post('/agregarTarea', (req, res) => {
 });
 
 // ----------------------
+// actualizar estado de tarea (realizado/no realizado)
+// ----------------------
+app.post('/actualizarEstado', (req, res) => {
+
+    const { tarea, realizado } = req.body;
+
+    if(!tarea){
+        res.json({actualizado:false});
+        return;
+    }
+
+    // Convertir booleano a 0 o 1 para la BD
+    const estadoBD = realizado ? 1 : 0;
+
+    // Usar parámetros preparados para evitar inyección SQL
+    const sql = `UPDATE Tareas SET realizado = ? WHERE Taname = ?`;
+    
+    db.consulta(sql, [estadoBD, tarea], (error, resultados) => {
+
+        if(error){
+            console.log(error);
+            res.json({actualizado:false});
+            return;
+        }
+
+        res.json({actualizado:true});
+
+    });
+
+});
+
+// ----------------------
 // eliminar tarea
 // ----------------------
 app.post('/eliminarTarea', (req, res) => {
@@ -134,6 +179,7 @@ app.post('/eliminarTarea', (req, res) => {
     });
 
 });
+
 
 // Iniciar servidor
 app.listen(puerto, () => {
